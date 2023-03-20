@@ -10,22 +10,24 @@
 
 int main()
 {
+	//create parent class
 	Player player;
-	Warrior warrior;
-	Mage mage;
-	Priest priest;
+	
 
+	//creates a list for each child class
 	std::vector<Warrior> warriors;
 	std::vector<Mage> mages;
 	std::vector<Priest> priests;
 
+	
 	int choice;
 	int raceChoice;
 	std::string playerName;
 	bool gameOver{ 1 };
-
-	while (gameOver)
+	//main loop
+	while (true)
 	{
+		//displays menu to user
 		std::cout << "\n\n\t\tCHARCTER CREATION!\n";
 		std::cout << "Which of the following would you like?\n";
 		std::cout << "\t-1. Create a Warrior!\n";
@@ -35,49 +37,56 @@ int main()
 		std::cout << "Your Choice: ";
 		std::cin >> choice;
 
+		//exits main loop and ends app
 		if (choice == 4) {
-			gameOver = 0;
 			break;
 		}
 
-		if (gameOver)
+		
+		//displays race menu to user
+		std::cout << "\nWhich race do you want?\n";
+		std::cout << "\t-1. Human!\n";
+		std::cout << "\t-2. Elf!\n";
+		std::cout << "\t-3. Dwarf!\n";
+		std::cout << "\t-4. Orc!\n";
+		std::cout << "\t-5. Troll!\n";
+		std::cout << "Your Choice: ";
+		std::cin >> raceChoice;
+		//displays and askes for user to enter name for character
+		std::cout << "\nWhat would you like to name your character? : ";
+		std::cin >> playerName;
+		//stores name in parent class var
+		player.setName(playerName);
+
+		//sets character race and stores in into parent class var
+		switch (raceChoice)
 		{
-			std::cout << "\nWhich race do you want?\n";
-			std::cout << "\t-1. Human!\n";
-			std::cout << "\t-2. Elf!\n";
-			std::cout << "\t-3. Dwarf!\n";
-			std::cout << "\t-4. Orc!\n";
-			std::cout << "\t-5. Troll!\n";
-			std::cout << "Your Choice: ";
-			std::cin >> raceChoice;
-
-			std::cout << "\nWhat would you like to name your character? : ";
-			std::cin >> playerName;
-			player.setName(playerName);
-
-			switch (raceChoice)
-			{
-			case 1:
-				player.setRace(Race::HUMAN);
-				break;
-			case 2:
-				player.setRace(Race::ELF);
-				break;
-			case 3:
-				player.setRace(Race::DWAERF);
-				break;
-			case 4:
-				player.setRace(Race::ORC);
-				break;
-			case 5:
-				player.setRace(Race::TROLL);
-				break;
-			default:
-				std::wcout << "incorrect input";
-				break;
-			}
+		case 1:
+			player.setRace(Race::HUMAN);
+			
+			break;
+		case 2:
+			player.setRace(Race::ELF);
+			
+			break;
+		case 3:
+			player.setRace(Race::DWAERF);
+			
+			break;
+		case 4:
+			player.setRace(Race::ORC);
+			
+			break;
+		case 5:
+			player.setRace(Race::TROLL);
+			
+			break;
+		default:
+			std::wcout << "incorrect input";
+			break;
 		}
-				
+		
+		//creates a character class and stores them into a list of ther type		
 		switch (choice)
 		{
 		case 1:
@@ -94,8 +103,8 @@ int main()
 		}
 		case 3:
 		{
-			Mage mage_(player.getName(), player.getRace());
-			priests.push_back(priest);
+			Priest priest_(player.getName(), player.getRace());
+			priests.push_back(priest_);
 			break;
 		}
 			
@@ -105,95 +114,32 @@ int main()
 			break;
 		}
 	}
-
+	//displays all characters to user with names race and attack displayed
 	std::cout << "\n*********************************************\n\t\tWARRIORS\n";
 
 	for (Warrior warrior : warriors) {
 		
-		Race warriorRace = warrior.getRace();
-		std::string raceName;
-		switch (warriorRace)
-		{
-		case Race::HUMAN:
-			raceName = "Human";
-			break;
-		case Race::ELF:
-			raceName = "Elf";
-			break;
-		case Race::DWAERF:
-			raceName = "Dwarf";
-			break;
-		case Race::ORC:
-			raceName = "Orc";
-			break;
-		case Race::TROLL:
-			raceName = "Troll";
-			break;
-		default:
-			break;
-		}
+		
 		std::cout << "i am a warrior with the name " << warrior.getName() << " ";
-		std::cout << "and with the race " << raceName << " ";
+		std::cout << "and with the race " << warrior.whatRace() << " ";
 		std::cout << "and my attack is: " << warrior.attack() << "\n\n";
 	}
 	std::cout << "\n*********************************************\n\t\tMAGES\n";
 	for (Mage mage : mages) {
-		Race mageRace = mage.getRace();
-		std::string raceName;
-		switch (mageRace)
-		{
-		case Race::HUMAN:
-			raceName = "Human";
-			break;
-		case Race::ELF:
-			raceName = "Elf";
-			break;
-		case Race::DWAERF:
-			raceName = "Dwarf";
-			break;
-		case Race::ORC:
-			raceName = "Orc";
-			break;
-		case Race::TROLL:
-			raceName = "Troll";
-			break;
-		default:
-			break;
-		}
+		
 		std::cout << "i am a mage with the name " << mage.getName() << " ";
-		std::cout << "and with the race " << raceName << " ";
+		std::cout << "and with the race " << mage.whatRace() << " ";
 		std::cout << "and my attack is: " << mage.attack() << "\n\n";
 	}
 
 	std::cout << "\n*********************************************\n\t\tPRIESTS\n";
 	for (Priest	priest : priests) {
-		Race priestRace = priest.getRace();
-		std::string raceName;
-		switch (priestRace)
-		{
-		case Race::HUMAN:
-			raceName = "Human";
-			break;
-		case Race::ELF:
-			raceName = "Elf";
-			break;
-		case Race::DWAERF:
-			raceName = "Dwarf";
-			break;
-		case Race::ORC:
-			raceName = "Orc";
-			break;
-		case Race::TROLL:
-			raceName = "Troll";
-			break;
-		default:
-			break;
-		}
+		
 		std::cout << "i am a priest with the name " << priest.getName() << " ";
-		std::cout << "and with the race " << raceName << " ";
+		std::cout << "and with the race " << priest.whatRace() << " ";
 		std::cout << "and my attack is: " << priest.attack() << "\n\n";
 	}
 
-	system("pause>0");
+	std::cin >> choice;
 	return 0;
 }

@@ -2,7 +2,8 @@
 #include <string>
 #include <iostream>
 
-enum class Race
+//enum of diffrent race types
+enum Race
 {
 	HUMAN,
 	ELF,
@@ -11,12 +12,16 @@ enum class Race
 	TROLL
 };
 
+//parent class
 class Player
 {
 public:
+	//parent consturctor
 	Player(const std::string& name, Race race, int hitPoints, int magicPoints);
+	//defult parent consturctor
 	Player();
-	virtual ~Player();
+
+	~Player();
 
 	// getters
 	std::string getName() const;
@@ -31,7 +36,7 @@ public:
 	void setMagicPoints(int magicPoints);
 
 
-
+	std::string whatRace();
 
 	//Attack method
 	virtual std::string attack() const;
